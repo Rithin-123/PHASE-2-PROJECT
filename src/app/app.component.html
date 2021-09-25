@@ -1,0 +1,72 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <hello *ngIf="!isBegin && !isComplete"></hello>
+            </div>
+          </div>
+        </div>
+        <div class="row quiz-row" *ngIf="isComplete">
+          <div class="col-xs-12">
+            <div class="col-xs-12" >
+              <div>
+                <h4>Quiz Result: {{score}}/{{questions.length}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row quiz-row" *ngIf="isBegin">
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <h4>{{currentQuestion.question}}</h4>
+              <div *ngFor="let option of currentQuestion.option">
+                <input class="quiz-radio" type="radio" name="{{currentQuestion.id}}" value="{{option.optionid}}" [(ngModel)]="currentQuestion.selected" />{{option.name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row quiz-row" *ngIf="!isBegin" >
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <input class="btn btn-success quiz-btn" type="button" value="{{buttonLabel}}" (click)="start()"/>
+            </div>
+          </div>
+        </div>
+        <div class="row quiz-row" *ngIf="isBegin">
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <input class="btn btn-primary quiz-btn" type="button" *ngIf="(currentIndex + 1) != questions.length" value="Next" (click)="next()"/>
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row quiz-row" *ngIf="isBegin && currentIndex == questions.length - 1">
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <input class="btn btn-success quiz-btn" type="button" value="Submit"  (click)="submit()"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+</div>
+
